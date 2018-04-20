@@ -1,0 +1,19 @@
+SushiBar generates the need Threads and objects. It saves the threads to enable use of the join function, so statistics will print out at the correct time.
+
+WaitingArea implements the wait() and notify() logic. The enter() method waits while the array is full. Upon awakening, it first checks if the bar is open (in case it got notified after hours). If it is, it calls notify(), increments the customerCounter and adds a customer to the waiting room.
+
+the next() method waits while the array is empty AND the sushiBar is open. This is because waitresses awoken to an empty waiting area after closing time should terminate instead of waiting forever. In this case, a null object is returned to skip the remainder of the Waitress logic.
+
+The door runs the run() method until the bar closes. Before terminating, it sends out a notifyAll() call, ensuring that all waitresses are awoken.
+
+The waitress runs the run() method until the bar closes and all customers have left the waiting room. This ensures that all customers are treated.
+
+wait() sets the thread to sleep until it receives a notify request from the other actor accessing the shared resource. This means consumer can wake producer and vice versa, but consumer can't wake consumer.
+
+notify() awakens a random sleeping thread.
+
+notifyAll() awakens all sleeping threads.
+
+All public variables in SushiBar are shared. They are simply referenced by name.
+
+The SushiBar thread reports the final statistics. It waits until the other threads have terminated using join().
